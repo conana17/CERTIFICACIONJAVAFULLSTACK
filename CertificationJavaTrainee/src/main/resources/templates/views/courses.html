@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Cursos</title>
+</head>
+<body class="body-background">
+<nav th:replace="components/header::nav_bar"></nav>
+
+<main>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">CURSOS TI</h1>
+                <p>
+                    <a th:href="@{/curso-crear}" class="btn btn-primary my-2" sec:authorize="hasAnyAuthority('ADMINISTRADOR')">Añadir Curso</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col" th:each="c:${curso}">
+                    <div >
+                        <div class="card shadow-sm">
+
+                            <img th:src="${c.imagen}"  width="100" height="200" class="card-img-top ">
+
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${c.descripcion}"></h5>
+                                <p class="card-text" th:text="${c.contenidos}"></p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a th:href="@{/modificar-curso/{id}(id=${c.id})}" class="btn btn-primary" sec:authorize="hasAnyAuthority('ADMINISTRADOR')">Editar</a>
+                                    <a th:href="@{/eliminar-curso/{id}(id=${c.id})}" class="btn btn-danger" sec:authorize="hasAnyAuthority('ADMINISTRADOR')">Eliminar</a>
+                                    <a th:href="@{/detalle-cursos/{id}(id=${c.id})}" class="btn btn-primary"  sec:authorize="!hasAnyAuthority('ADMINISTRADOR')">Ver Detalles</a>
+                                    <a th:href="@{/postularCurso/{id}(id=${c.id})}" class="btn btn-primary" sec:authorize="!hasAnyAuthority('ADMINISTRADOR')">Postular</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer th:replace="components/footer::footer_frag"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</body>
+</html>

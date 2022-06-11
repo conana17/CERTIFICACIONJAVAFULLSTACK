@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Home</title>
+</head>
+<body>
+    <nav th:replace="components/header::nav_bar"></nav>
+    <div class="container">
+        <h1 class="text-center card-tittle bg-dark text-light  mt-5 "
+            style="height: 100px;">Registro de Usuario</h1>
+        <div class="row">
+            <div class="col">
+                <div class="shadow-lg p-3 mb-5 mt-4 bg-body rounded bg-dark">
+                    <form class="row g-3" method="post" th:action="@{/postulante/registro}" th:object="${postulante}"
+                          id="formulario">
+                        <div class="col-md-4">
+                            <label th:for="rut" class="form-label fw-bold">Rut</label>
+                            <input type="text" class="form-control  border-1" placeholder="Ingrese su Rut" name="rut" th:field="*{rut}" >
+                            <span th:if="${#fields.hasErrors('rut')}" th:errors="*{rut}"></span>
+
+                        </div>
+
+                        <div class="col-md-8">
+                            <label th:for="nombre" class="col-form-label fw-bold">Nombre Cliente</label>
+                            <input type="text" class="form-control border-1" placeholder="Agregue todos sus nombres" name="nombre" id="nombre" th:field="*{nombre}">
+                            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label th:for="apellido1" class="col-form-label fw-bold">Primer Apellido</label>
+                            <input type="text" class="form-control border-1" placeholder="Ingrese su Primer Apellido" name="apellido1" id="apellido1" th:field="*{apellido1}">
+                            <span th:if="${#fields.hasErrors('apellido1')}" th:errors="*{apellido1}"></span>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label th:for="apellido2" class="col-form-label fw-bold">Segundo Apellido</label>
+                            <input type="text" class="form-control border-1" placeholder="Ingrese Segundo Apellido" name="apellido2" id="apellido2" th:field="*{apellido2}">
+                            <span th:if="${#fields.hasErrors('apellido2')}" th:errors="*{apellido2}"></span>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label th:for="password" class="col-form-label fw-bold">Ingresa Contraseña</label>
+                            <input type="password" class="form-control border-1" placeholder="Ingrese Nueva Contraseña" name="password" id="password" th:field="*{password}">
+                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label th:for="direccion" class="col-form-label fw-bold">Ingresa Dirección</label>
+                            <input type="text" class="form-control border-1" placeholder="Ingrese Dirección" name="direccion" id="direccion" th:field="*{direccion}">
+                            <span th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label th:for="regiones" class="form-label fw-bold">Región</label>
+                            <select
+                                    class="form-select mt-1 border-1" id="region" name="region" th:field="*{regiones}"
+                                    aria-label="Default select example">
+                                <option class="bg-white" value="0">Seleccione Región</option>
+                                <option class="bg-white" th:each="r:${regiones}" th:value="${r.id}" th:text="${r.descripcion}"></option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label th:for="edad" class="col-form-label fw-bold">Ingresa Edad</label>
+                            <input type="number" class="form-control border-1" placeholder="Edad" name="edad" id="edad" th:field="*{edad}">
+                            <span th:if="${#fields.hasErrors('edad')}" th:errors="*{edad}"></span>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label th:for="telefono" class="col-form-label fw-bold">Teléfono</label>
+                            <input type="text" class="form-control border-1" placeholder="Teléfono" name="telefono" id="telefono" th:field="*{telefono}">
+                            <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></span>
+                        </div>
+
+                        <div class="col-md-7">
+                            <label th:for="email" class="col-form-label fw-bold">Ingresa E-mail</label>
+                            <input type="text" class="form-control border-1" placeholder="Ingresa e-mail" name="email" id="email" th:field="*{email}">
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button  class="btn btn-primary " name="enviar" id="enviar">Registrarme
+                            </button>
+                        </div>
+
+                        <div class="col-12-mt-5">
+                            <a href="menu.jsp" class="btn btn-danger" type="button" id="volver">Regresar a Menú</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="components/footer::footer_frag"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</body>
+</html>

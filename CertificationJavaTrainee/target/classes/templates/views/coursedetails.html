@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <title>Home</title>
+</head>
+<body>
+<nav th:replace="components/header::nav_bar"></nav>
+<main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">DETALLE CURSOS</h1>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+        <div class="col">
+          <div>
+            <div class="col-md-12">
+              <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+
+                  <h3 class="mb-0" th:text="${curso.descripcion}"></h3>
+                  <strong class="d-inline-block mb-2 text-primary" th:text="'Cupos Disponibles = ' + ${curso.cuposDisponibles}"></strong>
+                  <div class="mb-1 text-muted " th:text="'Fecha de inicio ' + ${#dates.format(curso.fechainicio,'dd/MM/yyyy')}"></div>
+                  <div class="mb-1 text-muted" th:text="'Fecha de Termino ' + ${#dates.format(curso.fechafinal,'dd/MM/yyyy')}"></div>
+                  <br>
+                  <p class="card-text mb-auto" th:text="${curso.contenidos}"></p>
+                  <a th:href="@{/postularCurso/{id}(id=${curso.id})}" class="stretched-link">Postular</a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                  <img th:src="${curso.imagen}"  width="200" height="250">
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+</main>
+
+<footer th:replace="components/footer::footer_frag"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</body>
+</html>
